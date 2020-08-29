@@ -1,0 +1,62 @@
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+    ## 等待队列长度，默认100。
+    #accept-count: 1000
+    ## 最大工作线程数，默认200。（4核8g内存，线程数经验值800，操作系统做线程之间的切换调度是有系统开销的，所以不是越多越好。）
+    max-threads: 800
+    ## 最小工作空闲线程数，默认10。（适当增大一些，以便应对突然增长的访问量）
+    min-spare-threads: 100
+    ## 超时最多5秒后断开连接
+    connection-timeout: 5000
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  application:
+    name: brainstrom
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://47.100.115.11:3306/scoreplatform?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    database: 0
+    host: 47.100.115.11
+    port: 6379
+    password: root
+    timeout: 60000 #连接超时时间（毫秒）
+    lettuce:
+      shutdown-timeout: 300ms #关闭超时
+      pool:
+        max-active: 600 # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1  # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 10  # 连接池中的最大空闲连接
+        min-idle: 1   # 连接池中的最小空闲连接
+
+swagger:
+  ## 开启生产环境,屏蔽Swagger所有资源接口，默认为false
+  production: false
+  ## 开启Swagger的Basic认证功能,默认是false
+  basic:
+    enable: true
+    username: zhangsan
+    password: 123456
+knife4j:
+  ## md文档位置
+  markdowns: classpath:markdown/*
+
+
+logging:
+  config: classpath:logback.xml
+
+
+
+# management.endpoints.web.exposure.include: '*'
