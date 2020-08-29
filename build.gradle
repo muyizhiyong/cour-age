@@ -9,6 +9,12 @@ buildscript {
         maven {
             url "https://plugins.gradle.org/m2/"
         }
+        maven {
+            url 'http://www.datanucleus.org/downloads/maven2/'
+        }
+        maven {
+            url 'http://nexus.pentaho.org/content/groups/omni'
+        }
         mavenCentral()
     }
 
@@ -19,7 +25,6 @@ buildscript {
 }
 
 allprojects {
-
     ext {
         /**
          * gradle jvm 参数:
@@ -50,13 +55,15 @@ allprojects {
         version += "-SNAPSHOT"
     }
 
-
     repositories {
         maven {
             url 'http://maven.aliyun.com/nexus/content/groups/public/'
         }
         maven {
             url 'https://maven.aliyun.com/repository/public/'
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
         }
         maven {
             url 'http://www.datanucleus.org/downloads/maven2/'
@@ -67,8 +74,6 @@ allprojects {
         mavenCentral()
     }
 
-
-
     dependencyManagement {
         imports {
             mavenBom "org.springframework.boot:spring-boot-starter-parent:${springBootVersion}"
@@ -77,7 +82,6 @@ allprojects {
     }
 
     dependencies {
-
         // test
         testImplementation "junit:junit:${junitVersion}"
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -90,6 +94,7 @@ allprojects {
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
         annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
         runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
 
         // mybatis
         implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:${springBootMybatisVersion}"
@@ -98,7 +103,13 @@ allprojects {
 }
 
 subprojects {
-    dependencies {compile project(":brainstrom-common")}
+    if (it.name.endsWith("common")) {
+        dependencies {
+            compile "org.springframework.cloud:spring-cloud-starter-openfeign:2.2.4.RELEASE"
+            compile 'io.github.openfeign:feign-httpclient'
+            compile 'com.netflix.ribbon:ribbon'
+       }
+    }
 
     // 子模块的通用依赖
     dependencies {
@@ -108,17 +119,17 @@ subprojects {
         compile "org.springframework.boot:spring-boot-starter-jdbc"
 
         // 数据库驱动
-        compile group: 'oracle', name: 'ojdbc6', version: '11.2.0.3'
-        compile "mysql:mysql-connector-java:5.1.59"
+        compile 'mysql:mysql-connector-java:5.1.49'
 
         // redis
-        implementation 'com.alibaba:fastjson:1.2.51'
+        implementation 'com.alibaba:fastjson:1.2.72'
         compile "org.springframework.boot:spring-boot-starter-data-redis"
         compile "org.apache.commons:commons-pool2"
 
         // mapstruct
         compileOnly "org.mapstruct:mapstruct-processor:${mapstructVersion}"
         annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+        implementation "org.mapstruct:mapstruct-jdk8:${mapstructVersion}"
 
         // lombok
         compileOnly 'org.projectlombok:lombok'
@@ -129,9 +140,8 @@ subprojects {
 
 // 根项目
 dependencies {
-    implementation 'de.codecentric:spring-boot-admin-starter-client:2.1.6'
-    implementation 'io.micrometer:micrometer-registry-prometheus'
-    
+    compile 'mysql:mysql-connector-java:5.1.49'
+
 
     // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
     compileOnly "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"
