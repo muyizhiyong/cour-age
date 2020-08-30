@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @ComponentScan("com.muyi.courage")
 @EnableAutoConfiguration
@@ -14,6 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @EnableKnife4j
 @EnableTransactionManagement
+@EnableFeignClients
 public class CourageApplication {
 
 	public static void main(String[] args) {

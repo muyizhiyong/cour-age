@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--suppress SqlNoDataSourceInspection -->
+<mapper namespace="com.muyi.courage.quartz.repository.TimeJobTableMapper">
+	<resultMap id="BaseResultMap" type="com.muyi.courage.quartz.domain.TimeJobDO">
+		<id column="ID" property="id" jdbcType="VARCHAR"/>
+		<result column="TRIG_NAME" property="trigName" jdbcType="VARCHAR"/>
+		<result column="CRON" property="cron" jdbcType="VARCHAR"/>
+		<result column="JOB_NAME" property="jobName" jdbcType="VARCHAR"/>
+		<result column="OBJ_NAME" property="objName" jdbcType="VARCHAR"/>
+		<result column="CONCURRENT" property="concurrent" jdbcType="INTEGER"/>
+		<result column="JOB_STATE" property="jobState" jdbcType="INTEGER"/>
+		<result column="DESP" property="desp" jdbcType="VARCHAR"/>
+		<result column="ARGUMENTS" property="arguments" jdbcType="VARCHAR"/>
+		<result column="INIT_FLAG" property="init_flag" jdbcType="INTEGER"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		NO as ID, TRIG_NAME, CRON, JOB_NAME, OBJ_NAME, CONCURRENT, JOB_STATE, DESP, ARGUMENTS, INIT_FLAG
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List"/>
+		from TIME_JOB
+		where NO = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete
+		from TIME_JOB
+		where NO = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.muyi.courage.quartz.domain.TimeJobDO">
+		insert into TIME_JOB (NO, TRIG_NAME, CRON,
+							  JOB_NAME, OBJ_NAME,
+							  CONCURRENT, JOB_STATE, DESP,
+							  ARGUMENTS, INIT_FLAG)
+		values (#{id,jdbcType=VARCHAR}, #{trigName,jdbcType=VARCHAR}, #{cron,jdbcType=VARCHAR},
+				#{jobName,jdbcType=VARCHAR}, #{objName,jdbcType=VARCHAR},
+				#{concurrent,jdbcType=INTEGER}, #{jobState,jdbcType=INTEGER}, #{desp,jdbcType=VARCHAR},
+				#{arguments,jdbcType=VARCHAR}, 0)
+	</insert>
+	<insert id="insertSelective" parameterType="com.muyi.courage.quartz.domain.TimeJobDO">
+		insert into TIME_JOB
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				NO,
+			</if>
+			<if test="trigName != null">
+				TRIG_NAME,
+			</if>
+			<if test="cron != null">
+				CRON,
+			</if>
+			<if test="jobName != null">
+				JOB_NAME,
+			</if>
+			<if test="objName != null">
+				OBJ_NAME,
+			</if>
+			<if test="concurrent != null">
+				CONCURRENT,
+			</if>
+			<if test="jobState != null">
+				JOB_STATE,
+			</if>
+			<if test="desp != null">
+				DESP,
+			</if>
+			<if test="arguments != null">
+				ARGUMENTS,
+			</if>
+			INIT_FLAG
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="trigName != null">
+				#{trigName,jdbcType=VARCHAR},
+			</if>
+			<if test="cron != null">
+				#{cron,jdbcType=VARCHAR},
+			</if>
+			<if test="jobName != null">
+				#{jobName,jdbcType=VARCHAR},
+			</if>
+			<if test="objName != null">
+				#{objName,jdbcType=VARCHAR},
+			</if>
+			<if test="concurrent != null">
+				#{concurrent,jdbcType=INTEGER},
+			</if>
+			<if test="jobState != null">
+				#{jobState,jdbcType=INTEGER},
+			</if>
+			<if test="desp != null">
+				#{desp,jdbcType=VARCHAR},
+			</if>
+			<if test="arguments != null">
+				#{arguments,jdbcType=VARCHAR},
+			</if>
+			0
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.muyi.courage.quartz.domain.TimeJobDO">
+		update TIME_JOB
+		<set>
+			<if test="trigName != null">
+				TRIG_NAME = #{trigName,jdbcType=VARCHAR},
+			</if>
+			<if test="cron != null">
+				CRON = #{cron,jdbcType=VARCHAR},
+			</if>
+			<if test="jobName != null">
+				JOB_NAME = #{jobName,jdbcType=VARCHAR},
+			</if>
+			<if test="objName != null">
+				OBJ_NAME = #{objName,jdbcType=VARCHAR},
+			</if>
+			<if test="concurrent != null">
+				CONCURRENT = #{concurrent,jdbcType=INTEGER},
+			</if>
+			<if test="jobState != null">
+				JOB_STATE = #{jobState,jdbcType=INTEGER},
+			</if>
+			<if test="desp != null">
+				DESP = #{desp,jdbcType=VARCHAR},
+			</if>
+			<if test="arguments != null">
+				ARGUMENTS = #{arguments,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where NO = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.muyi.courage.quartz.domain.TimeJobDO">
+		update TIME_JOB
+		set TRIG_NAME  = #{trigName,jdbcType=VARCHAR},
+			CRON       = #{cron,jdbcType=VARCHAR},
+			JOB_NAME   = #{jobName,jdbcType=VARCHAR},
+			OBJ_NAME   = #{objName,jdbcType=VARCHAR},
+			CONCURRENT = #{concurrent,jdbcType=INTEGER},
+			JOB_STATE  = #{jobState,jdbcType=INTEGER},
+			DESP       = #{desp,jdbcType=VARCHAR},
+			ARGUMENTS  = #{arguments,jdbcType=VARCHAR}
+		where NO = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="qryTotalRow" parameterType="java.util.Map" resultType="int" databaseId="mysql">
+		select count(1)
+		from TIME_JOB t
+		<where>
+			<if test="jobName_Query!= null and jobName_Query!=''">
+				AND t.JOB_NAME like CONCAT('%',#{jobName_Query,jdbcType=VARCHAR},'%')
+			</if>
+		</where>
+	</select>
+	<select id="qryTotalRow" parameterType="java.util.Map" resultType="int" databaseId="oracle">
+		select count(1)
+		from TIME_JOB t
+		<where>
+			<if test="jobName_Query!= null and jobName_Query!=''">
+				AND t.JOB_NAME like '%'|| #{jobName_Query,jdbcType=VARCHAR} ||'%'
+			</if>
+		</where>
+	</select>
+	<select id="qryTimeJob" parameterType="java.util.Map" resultMap="BaseResultMap" databaseId="mysql">
+		select
+		<include refid="Base_Column_List"/>
+		from TIME_JOB t
+		<where>
+			<if test="jobName_Query!= null and jobName_Query!=''">
+				AND t.JOB_NAME like CONCAT('%',#{jobName_Query,jdbcType=VARCHAR},'%')
+			</if>
+		</where>
+		order by t.JOB_NAME
+		limit #{startRow,jdbcType=NUMERIC},#{pageSize,jdbcType=NUMERIC}
+	</select>
+	<select id="qryTimeJob" parameterType="java.util.Map" resultMap="BaseResultMap" databaseId="oracle">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM
+		(select
+		<include refid="Base_Column_List"/>, rownum rn
+		from TIME_JOB t
+		<where>
+			<if test="jobName_Query!= null and jobName_Query!=''">
+				AND t.JOB_NAME like '%' || #{jobName_Query,jdbcType=VARCHAR} || '%'
+			</if>
+			AND rownum &lt;= #{startRow,jdbcType=NUMERIC} + #{pageSize,jdbcType=NUMERIC}
+		</where>
+		order by t.JOB_NAME)
+		WHERE rn &gt; #{startRow,jdbcType=NUMERIC}
+	</select>
+	<select id="qryTimeJobListToConfig" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"/>
+		from TIME_JOB t
+		where t.JOB_STATE = 1
+	</select>
+	<select id="qryTimeJobListByTrigName" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"/>
+		from TIME_JOB t
+		where t.TRIG_NAME =#{trigName,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAutoInit" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"/>
+		from TIME_JOB
+	    where INIT_FLAG = 1
+	</select>
+	<update id="updateAutoInitByPrimaryKey" parameterType="com.muyi.courage.quartz.domain.TimeJobDO">
+		update TIME_JOB
+		set INIT_FLAG = 0
+		where NO = #{id,jdbcType=VARCHAR}
+	</update>
+</mapper>

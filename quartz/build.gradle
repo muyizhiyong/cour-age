@@ -1,0 +1,31 @@
+project('quartz-sdk') {
+    dependencies {
+        // 依赖common
+        implementation project(':common')
+
+        implementation 'org.springframework.boot:spring-boot-starter-quartz'
+
+        // mybatis
+        implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:${springBootMybatisVersion}"
+
+        // springfox-swagger-compileOnly
+        compileOnly "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
+        compileOnly "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"
+    }
+}
+
+project("quartz-impl") {
+    dependencies {
+        // 依赖common
+        implementation project(':common')
+        implementation project(':quartz:quartz-sdk')
+
+        compile 'mysql:mysql-connector-java:5.1.49'
+        
+        implementation 'org.springframework.boot:spring-boot-starter-quartz'
+
+        compile "pentaho-kettle:kettle-core:6.1.0.1-196"
+        compile "pentaho-kettle:kettle-engine:6.1.0.1-196"
+        compile fileTree(dir: 'lib', includes: ['*jar'])
+    }
+}

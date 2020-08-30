@@ -9,8 +9,7 @@
 					converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
 	<!-- 彩色日志格式 -->
 	<property name="CONSOLE_LOG_PATTERN"
-			  value="${CONSOLE_LOG_PATTERN:-%clr(%clr([TID: %X{tid}]) %d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
-
+			  value="${CONSOLE_LOG_PATTERN:-%clr(%clr([muyi]) %d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}LINE:%line){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
 
 	<contextName>example</contextName>
 
@@ -41,8 +40,9 @@
 			<totalSizeCap>40GB</totalSizeCap>
 		</rollingPolicy>
 		<!-- 日志文件的格式 -->
+		<!-- 日志文件的格式 -->
 		<encoder>
-			<Pattern>[TID: %X{tid}] %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%file:%line] [%thread] - %msg%n</Pattern>
+			<Pattern>[muyi] %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level -&#45;&#45; [%-80.80logger{79}:LINE:%line] [%thread] - %msg%n</Pattern>
 			<charset>utf-8</charset>
 		</encoder>
 	</appender>

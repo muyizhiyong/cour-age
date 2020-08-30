@@ -105,7 +105,6 @@ allprojects {
 subprojects {
     if (it.name.endsWith("common")) {
         dependencies {
-            compile "org.springframework.cloud:spring-cloud-starter-openfeign:2.2.4.RELEASE"
             compile 'io.github.openfeign:feign-httpclient'
             compile 'com.netflix.ribbon:ribbon'
        }
@@ -134,14 +133,17 @@ subprojects {
         // lombok
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
+
+        compile "org.springframework.cloud:spring-cloud-starter-openfeign:2.2.4.RELEASE"
     }
 }
 
 
 // 根项目
 dependencies {
-    compile 'mysql:mysql-connector-java:5.1.49'
 
+    compile project(":quartz:quartz-sdk")
+    compile project(":quartz:quartz-impl")
 
     // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
     compileOnly "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"

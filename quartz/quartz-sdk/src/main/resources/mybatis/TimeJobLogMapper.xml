@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.muyi.courage.quartz.repository.TimeJobLogMapper" >
+  <resultMap id="BaseResultMap" type="com.muyi.courage.quartz.domain.TimeJobLog" >
+    <id column="LOGIC_ID" property="logicId" jdbcType="VARCHAR" />
+    <result column="JOB_NAME" property="jobName" jdbcType="VARCHAR" />
+    <result column="JOB_TYPE" property="jobType" jdbcType="INTEGER" />
+    <result column="JOB_RESULT" property="jobResult" jdbcType="INTEGER" />
+    <result column="JOB_CREATOR" property="jobCreator" jdbcType="VARCHAR" />
+    <result column="START_TIME" property="startTime" jdbcType="VARCHAR" />
+    <result column="END_TIME" property="endTime" jdbcType="VARCHAR" />
+    <result column="RESULT_DESC" property="resultDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+   LOGIC_NO as LOGIC_ID,JOB_NAME,JOB_TYPE,JOB_RESULT,JOB_CREATOR,START_TIME,END_TIME,RESULT_DESC
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TIME_JOB_LOG
+    where LOGIC_NO = #{logicId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteLog" parameterType="java.lang.Integer">
+      delete from TIME_JOB_LOG where start_time &lt;= date_sub(current_date(),INTERVAL #{timeJobLogReservedDays, jdbcType=INTEGER} day)
+  </delete>
+  <insert id="insert" parameterType="com.muyi.courage.quartz.domain.TimeJobLog" >
+    insert into TIME_JOB_LOG (LOGIC_NO,JOB_NAME,
+    JOB_TYPE,JOB_RESULT,JOB_CREATOR,START_TIME,
+    END_TIME,RESULT_DESC)
+    values (#{logicId,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}, #{jobType,jdbcType=INTEGER}, 
+      #{jobResult,jdbcType=INTEGER}, #{jobCreator,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{resultDesc,jdbcType=VARCHAR}})
+  </insert>
+  <insert id="insertSelective" parameterType="com.muyi.courage.quartz.domain.TimeJobLog" >
+    insert into TIME_JOB_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logicId != null" >
+		LOGIC_NO,
+      </if>
+      <if test="jobName != null" >
+        JOB_NAME,
+      </if>
+      <if test="jobType != null" >
+        JOB_TYPE,
+      </if>
+      <if test="jobResult != null" >
+        JOB_RESULT,
+      </if>
+      <if test="jobCreator != null" >
+        JOB_CREATOR,
+      </if>
+      <if test="startTime != null" >
+        START_TIME,
+      </if>
+      <if test="endTime != null" >
+        END_TIME,
+      </if>
+      <if test="resultDesc != null" >
+        RESULT_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logicId != null" >
+        #{logicId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null" >
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobType != null" >
+        #{jobType,jdbcType=INTEGER},
+      </if>
+      <if test="jobResult != null" >
+        #{jobResult,jdbcType=INTEGER},
+      </if>
+      <if test="jobCreator != null" >
+        #{jobCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="resultDesc != null" >
+        #{resultDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="qryTotalRow" parameterType="java.util.Map" resultType="int" >
+    select count(1)
+  from TIME_JOB_LOG t
+  <where>
+    <if test="jobName_Query!= null and jobName_Query!=''">
+      AND t.JOB_NAME like CONCAT('%',#{jobName_Query,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime!= null and startTime!=''">
+      AND t.START_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+    </if>
+    <if test="endTime!= null and endTime!=''">
+      AND t.END_TIME &lt;= #{endTime,jdbcType=VARCHAR}
+    </if>
+    <if test="jobResult !=null and jobResult != -1">
+      AND t.JOB_RESULT =#{jobResult,jdbcType=INTEGER}
+    </if>
+  </where>
+  </select>
+  <select id="qryTimeJobLogByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+	  select
+	  <include refid="Base_Column_List" />
+	  from TIME_JOB_LOG t
+	  <where>
+	    <if test="jobName_Query!= null and jobName_Query!=''">
+	      AND t.JOB_NAME like  CONCAT('%',#{jobName_Query,jdbcType=VARCHAR},'%')
+	    </if>
+	    <if test="startTime!= null and startTime!=''">
+	      AND t.START_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+	    </if>
+	    <if test="endTime!= null and endTime!=''">
+	      AND t.END_TIME &lt;= #{endTime,jdbcType=VARCHAR}
+	    </if>
+	    <if test="jobResult !=null and jobResult != -1">
+	      AND t.JOB_RESULT = #{jobResult,jdbcType=INTEGER} 
+	    </if>
+	  </where>
+	  order by  t.START_TIME desc,t.END_TIME desc 
+	  limit #{startRow,jdbcType=NUMERIC},#{pageSize,jdbcType=NUMERIC}
+  </select>
+  <update id="updateByPrimaryKey" parameterType="com.muyi.courage.quartz.domain.TimeJobLog" >
+    update TIME_JOB_LOG
+    set JOB_RESULT = #{jobResult,jdbcType=INTEGER},
+      END_TIME = #{endTime,jdbcType=VARCHAR},
+      RESULT_DESC = #{resultDesc,jdbcType=VARCHAR}
+    where LOGIC_NO = #{logicId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

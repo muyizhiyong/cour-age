@@ -24,7 +24,7 @@ spring:
     name: courage
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://47.100.115.11:3306/scoreplatform?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+    url: jdbc:mysql://47.100.115.11:3306/courage?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
@@ -42,7 +42,6 @@ spring:
         max-idle: 10  # 连接池中的最大空闲连接
         min-idle: 1   # 连接池中的最小空闲连接
 
-
 logging:
   config: classpath:logback.xml
 
@@ -52,4 +51,32 @@ common:
     mapApiAk: 133848c89004afe8dede89ef7428c98d
   fileTEMP:
     tmpFilePath: /tmpfile
+
+quartz:
+  enable: true
+  scheduler:
+    instance-name: clusteredScheduler
+    instance-id: AUTO
+    skip-update-check: true
+  job-store:
+    class-name: org.quartz.impl.jdbcjobstore.JobStoreTX
+    driver-delegate-class: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+    datasource: quartzDataSource
+    table-prefix: QRTZ_
+    is-clustered: true
+  thread-pool:
+    class-name: org.quartz.simpl.SimpleThreadPool
+    thread-count: 5
+  datasource:
+    driver: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.100.115.11:3306/courage?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    user: root
+    password: root
+    maxConnections: 5
+
+weather:
+    weatherlUrl: http://www.weather.com.cn/weather/%s.shtml
+    etouchUrl: http://wthrcdn.etouch.cn/weather_mini?citykey=%s
+
+
 # management.endpoints.web.exposure.include: '*'

@@ -42,11 +42,6 @@ public class DTO implements Serializable {
 		this.retMsg = retMsg;
 	}
 
-	@ApiModelProperty(value = "响应异常信息", hidden = true)
-	public void setRetException(String retMsg) {
-		this.setRetCode(RetCodeEnum.EXCEPTION.getCode());
-		this.setRetMsg(retMsg);
-	}
 
 	@ApiModelProperty(value = "响应指定信息", hidden = true)
 	public void setResult(RetCodeEnum e) {
