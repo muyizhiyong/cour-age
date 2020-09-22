@@ -48,7 +48,6 @@ allprojects {
         resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
     }
 
-
     if ("release".equals(buildLevel)) {
         version += "-RELEASE"
     } else {
@@ -144,6 +143,12 @@ dependencies {
 
     compile project(":quartz:quartz-sdk")
     compile project(":quartz:quartz-impl")
+
+
+    compile project(":rabbitMq:rabbitMq-api")
+    compile project(":rabbitMq:rabbitMq-impl")
+    compile project(":rabbitMq:rabbitMq-sdk")
+
 
     // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
     compileOnly "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"

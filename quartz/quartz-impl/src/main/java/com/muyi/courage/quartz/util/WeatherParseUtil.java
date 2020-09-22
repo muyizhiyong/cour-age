@@ -34,7 +34,6 @@ public class WeatherParseUtil {
 			weather.setDayTemp(getDayTemp(element));
 			weather.setDayWind(getDayWind(element));
 			weather.setDayWindComp(getDayWindComp(element));
-			weather.setDayWeatherId(city.getWeatherId());
 
 			weatherList.add(weather);
 			weather.toString();
@@ -68,7 +67,6 @@ public class WeatherParseUtil {
 					weather.setDayTemp((low + high) / 2);
 					weather.setDayWind(forecastObj.getString("fengxiang"));
 					weather.setDayWindComp(getDayWindComp(forecastObj.getString("fengli")));
-					weather.setDayWeatherId(city.getWeatherId());
 
 					weatherList.add(weather);
 					weather.toString();

@@ -26,8 +26,6 @@ public class DTO implements Serializable {
 	@ApiModelProperty(value = "响应信息")
 	private String retMsg;
 
-	@ApiModelProperty(value = "TraceId")
-	private String tid;
 
 	public DTO() {
 	}
@@ -41,7 +39,6 @@ public class DTO implements Serializable {
 		this.retCode = retCode;
 		this.retMsg = retMsg;
 	}
-
 
 	@ApiModelProperty(value = "响应指定信息", hidden = true)
 	public void setResult(RetCodeEnum e) {

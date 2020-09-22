@@ -4,3 +4,7 @@ include 'common'
 
 include 'quartz:quartz-sdk'
 include 'quartz:quartz-impl'
+
+include 'rabbitMq:rabbitMq-api'
+include 'rabbitMq:rabbitMq-impl'
+include 'rabbitMq:rabbitMq-sdk'

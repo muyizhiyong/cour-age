@@ -10,6 +10,7 @@ import java.security.interfaces.RSAPrivateCrtKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -748,19 +749,73 @@ public final class EncryptUtil {
 	public static byte[] decryptBy3DES(byte[] src, String key)throws Exception {
 		return decrypt(src , hex2byte(key), DESede);
 	}
-	
+
+
+	public static String encryptEasy(String sourceString, String password) {
+		char[] p = password.toCharArray(); // 字符串转字符数组
+		int n = p.length; // 密码长度
+		char[] c = sourceString.toCharArray();
+		int m = c.length; // 字符串长度
+		for (int k = 0; k < m; k++) {
+			int mima = c[k] + p[k / n]; // 加密
+			c[k] = (char) mima;
+		}
+		return new String(c);
+	}
+
+	/**
+	 *
+	 * @param sourceString
+	 * @param password
+	 * @return 明文
+	 */
+	public static String decryptEasy(String sourceString, String password) {
+		char[] p = password.toCharArray(); // 字符串转字符数组
+		int n = p.length; // 密码长度
+		char[] c = sourceString.toCharArray();
+		int m = c.length; // 字符串长度
+		for (int k = 0; k < m; k++) {
+			int mima = c[k] - p[k / n]; // 解密
+			c[k] = (char) mima;
+		}
+		return new String(c);
+	}
+
+
+
+
 	public static void main(String[] args) {
 
 		try {
+			String wen = "root";
+			String pass = "123456789";
+
+			String a = encryptEasy(wen, pass);
+			System.out.println(a);
+
+			//Base64 加密
+			String encoded = Base64.getEncoder().encodeToString(wen.getBytes("utf-8"));
+			System.out.println("Base 64 加密后：" + encoded);
+
+			encoded ="wqPCoMKgwqU=";
+			//Base64 解密
+			byte[] decoded = Base64.getDecoder().decode(encoded);
+
+			String decodeStr = new String(decoded);
+
+			System.out.println("Base 64 解密后：" + decodeStr);
+			String b = decryptEasy(decodeStr, pass);
+			System.out.println("Base 64 解密后：" + b);
+			System.out.println(b);
 
 			//String key = getDESKeyHex();
-			String key = "2FC4BC32E019A8EADA8F64AEDA94CD682FC4BC32E019A8EA";
-			String clearText="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root><cmdid value=\"900006\"/><cmddatetime date=\"2011-09-01 10:20:51\" time=\"2011-09-01 10:20:51\"/><msgid value=\"b1c638af-70a6-4931-ab3a-b88174516bb9\"/><remote ipaddress=\"10.2.7.62\" termno=\"000100\"/><projinfo/></root>";
-			byte[] macBytes = generateMacBytes919(getMABBytes(clearText),key);
-			System.out.println("111111111");
-			System.out.println(macBytes.length);
-			String result=byte2hex(macBytes);
-			System.out.println(result);
+//			String key = "2FC4BC32E019A8EADA8F64AEDA94CD682FC4BC32E019A8EA";
+//			String clearText="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root><cmdid value=\"900006\"/><cmddatetime date=\"2011-09-01 10:20:51\" time=\"2011-09-01 10:20:51\"/><msgid value=\"b1c638af-70a6-4931-ab3a-b88174516bb9\"/><remote ipaddress=\"10.2.7.62\" termno=\"000100\"/><projinfo/></root>";
+//			byte[] macBytes = generateMacBytes919(getMABBytes(clearText),key);
+//			System.out.println("111111111");
+//			System.out.println(macBytes.length);
+//			String result=byte2hex(macBytes);
+//			System.out.println(result);
 			
 //			System.out.println("==" + EncryptUtil.MD5("admin"));
 //			System.out.println("==" + EncryptUtil.MD5("admin"));
@@ -794,7 +849,22 @@ public final class EncryptUtil {
 //			byte[] strEnc = encrypt(getMABBytes("1234567812345678"),key); //加密字符串,返回String的密文 
 //			System.out.println("["+byte2hex(strEnc)+"]"); 
 //			byte[] strDes = decrypt(strEnc,key); //把String 类型的密文解密 
-//			System.out.println("["+new String(strDes)+"]"); 
+//			System.out.println("["+new String(strDes)+"]");
+			byte[] ori = "root1234".getBytes();
+			byte[] pin = new byte[(ori.length/8+1)*8];
+			java.util.Arrays.fill(pin, (byte)0x00);
+			System.arraycopy(ori, 0, pin, 0, ori.length);
+
+			byte[] passWord = encryptByDES(pin,"123456789abcdef");
+
+			String newPassword = new String(passWord).trim();
+			System.out.println(newPassword);
+
+			byte[] pa = decryptByDES(newPassword.getBytes(),"123456789abcdef");
+
+			String pas = new String(pa).trim();
+			System.out.println(pas);
+
 		}
 
 		catch (Exception e3) {

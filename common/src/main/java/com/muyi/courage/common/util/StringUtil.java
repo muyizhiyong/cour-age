@@ -1,10 +1,14 @@
 package com.muyi.courage.common.util;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.codec.binary.Base64;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
+import java.util.Iterator;
 
 /**
  * @author shp
@@ -339,4 +343,65 @@ public final class StringUtil {
 		}
 		return str.substring(a,b);
 	}
+
+	public static int getPenultIndex(String string, char c) {
+		int lastIndex = string.lastIndexOf(c);
+		return lastIndex == -1 ? -1 : string.substring(0, lastIndex).lastIndexOf(c);
+	}
+
+	public static boolean checkIfHasUserDefObjects(Object testObj) {
+		if (testObj != null && !(testObj instanceof String) && !(testObj instanceof Integer) && !(testObj instanceof Boolean) && !(testObj instanceof Float) && !(testObj instanceof Double) && !(testObj instanceof BigDecimal) && !(testObj instanceof Long) && !(testObj instanceof Character) && !(testObj instanceof Byte) && !(testObj instanceof Number) && !(testObj instanceof Date)) {
+			Iterator iterator;
+			Object key;
+			if (testObj instanceof JSONArray) {
+				iterator = ((JSONArray)testObj).iterator();
+
+				while(iterator.hasNext()) {
+					key = iterator.next();
+					if (checkIfHasUserDefObjects(key)) {
+						return true;
+					}
+				}
+			} else {
+				if (!(testObj instanceof JSONObject)) {
+					return true;
+				}
+
+				iterator = ((JSONObject)testObj).keySet().iterator();
+
+				while(iterator.hasNext()) {
+					key = iterator.next();
+					if (checkIfHasUserDefObjects(((JSONObject)testObj).get(key))) {
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
+
+	public static void main(String[] args) {
+		String jsonString= "{\"retCode\":\"00\",\"retList\":[{\"predInCash\":[79305312,69346056]}]}";
+		JSONObject jsonObject = JSONUtil.parseJSONObject(jsonString);
+		BigDecimal amount = new BigDecimal("0");
+		if ("00".equals(jsonObject.get("retCode"))) {
+			JSONObject retJson = (JSONObject) jsonObject.getJSONArray("retList").get(0);
+			JSONArray b =retJson.getJSONArray("predInCash");
+			Object c=retJson.getJSONArray("predInCash").get(0);
+			String a = retJson.getJSONArray("predInCash").get(0).toString();
+
+
+			System.out.println(new BigDecimal(retJson.getJSONArray("predInCash").get(0).toString()));
+			amount.add(new BigDecimal(retJson.getJSONArray("predInCash").get(0).toString()));
+
+		} else {
+			System.out.println("error");
+		}
+
+
+	}
+
+
 }
