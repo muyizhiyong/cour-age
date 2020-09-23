@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 18888
   tomcat:
     uri-encoding: UTF-8
     ## 等待队列长度，默认100。

@@ -1,3 +1,12 @@
+project('rabbitMq-impl') {
+    dependencies {
+        // 依赖common
+        implementation project(':common')
+        implementation project(':rabbitMq:rabbitMq-api')
+        implementation project(':rabbitMq:rabbitMq-sdk')
+    }
+}
+
 project('rabbitMq-sdk') {
     dependencies {
         // 依赖common
