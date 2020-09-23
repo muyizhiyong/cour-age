@@ -156,6 +156,7 @@ dependencies {
     compile project(":rabbitMq:rabbitMq-impl")
     compile project(":rabbitMq:rabbitMq-sdk")
 
+    compile project(":handler:handler-sdk")
 
     // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
     compileOnly "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"

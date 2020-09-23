@@ -1,9 +1,15 @@
+project('rabbitMq-api') {
+    dependencies {
+        implementation project(':handler:handler-sdk')
+    }
+}
 project('rabbitMq-impl') {
     dependencies {
         // 依赖common
         implementation project(':common')
         implementation project(':rabbitMq:rabbitMq-api')
         implementation project(':rabbitMq:rabbitMq-sdk')
+        implementation project(':handler:handler-sdk')
     }
 }
 
@@ -14,5 +20,7 @@ project('rabbitMq-sdk') {
 
         implementation 'org.springframework.boot:spring-boot-starter'
         implementation 'org.springframework.boot:spring-boot-starter-amqp'
+
+        implementation project(':handler:handler-sdk')
     }
 }

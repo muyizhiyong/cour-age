@@ -1,12 +1,15 @@
 package com.muyi.courage.rabbitMq.web;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.muyi.courage.common.dto.DTO;
+import com.muyi.courage.handler.annotation.CourageMessageMapping;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -26,5 +29,6 @@ public interface Other2BootResource {
     DTO send2Boot(@RequestParam Map<String, Object> params);
 
 
-
+	@CourageMessageMapping("getMsgByType1")
+	JSONObject getMsgByType1(@RequestBody Map<String, Object> req);
 }

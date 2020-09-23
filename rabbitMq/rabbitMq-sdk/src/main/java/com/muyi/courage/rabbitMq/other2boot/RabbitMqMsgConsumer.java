@@ -1,5 +1,6 @@
 package com.muyi.courage.rabbitMq.other2boot;
 
+import com.muyi.courage.handler.MsgHandler;
 import com.muyi.courage.rabbitMq.util.MQDataModule;
 import com.muyi.courage.rabbitMq.util.MQDocument;
 import com.rabbitmq.client.Channel;
@@ -8,11 +9,16 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 
 @Slf4j
 @Component
 public class RabbitMqMsgConsumer {
+
+    @Resource
+    private MsgHandler msgHandler;
+
 
     @RabbitListener(queues = "#{'${rabbitmq.queue-name.other2boot}'.split(',')}")
     public String process(Message message, Channel channel) {
@@ -25,7 +31,10 @@ public class RabbitMqMsgConsumer {
             // resMsg = "{'a':'1','b':2}"  参数是：map 或者 dto
             // resMsg = "username"    参数是：string
             // resMsg = "[1,2,3]"     参数是：list
-            Object resMsg = "[1,2,3]";
+            String reqType ="getMsgByType1";
+            Object resMsg = msgHandler.doHandler(reqType,new Object[]{dataModuleJson});
+
+
 
             //业务信息包装一层MQDocument返回
             MQDocument mqDocument = new MQDocument();

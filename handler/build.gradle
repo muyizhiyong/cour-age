@@ -1,0 +1,13 @@
+
+project('handler-sdk') {
+    dependencies {
+        // 依赖common
+        implementation project(':common')
+
+        implementation 'org.springframework:spring-core'
+        implementation 'org.springframework:spring-beans'
+        implementation 'org.springframework:spring-context'
+        implementation 'org.springframework:spring-aop'
+
+    }
+}

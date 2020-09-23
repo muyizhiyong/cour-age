@@ -8,3 +8,5 @@ include 'quartz:quartz-impl'
 include 'rabbitMq:rabbitMq-api'
 include 'rabbitMq:rabbitMq-impl'
 include 'rabbitMq:rabbitMq-sdk'
+
+include 'handler:handler-sdk'
