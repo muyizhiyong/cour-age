@@ -28,9 +28,15 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 60
+      idle-timeout: 30000
+      validation-timeout: 3000
+      connection-timeout: 60000
   redis:
     database: 0
-    host: 47.100.115.11
+    host: 127.0.0.1
     port: 6379
     password: root
     timeout: 60000 #连接超时时间（毫秒）
@@ -49,6 +55,8 @@ spring:
     virtual-host: /courage
     listener:
       simple:
+        #监听数
+        concurrency: 3
         #确认消息模式
         acknowledge-mode: manual
         #负载均衡
@@ -105,5 +113,7 @@ rabbitmq:
       # boot --> other消息发送后，等待other响应的超时时间（毫秒）
       timeout: 80000
 
-
+auth:
+  accessTokenValiditySeconds: 1800
+  refreshTokenValiditySeconds: 3600
 # management.endpoints.web.exposure.include: '*'

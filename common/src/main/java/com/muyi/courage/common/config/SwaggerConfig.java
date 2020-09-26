@@ -22,7 +22,7 @@ public class SwaggerConfig {
 	public Docket api1() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.useDefaultResponseMessages(false)
-				.groupName("通讯中心")
+				.groupName("通讯模块")
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("com.muyi.courage.rabbitMq"))
 				.paths(PathSelectors.any())
@@ -30,5 +30,16 @@ public class SwaggerConfig {
 				;
 	}
 
+	@Bean
+	public Docket api2() {
+		return new Docket(DocumentationType.SWAGGER_2)
+				.useDefaultResponseMessages(false)
+				.groupName("权限模块")
+				.select()
+				.apis(RequestHandlerSelectors.basePackage("com.muyi.courage.auth"))
+				.paths(PathSelectors.any())
+				.build()
+				;
+	}
 
 }

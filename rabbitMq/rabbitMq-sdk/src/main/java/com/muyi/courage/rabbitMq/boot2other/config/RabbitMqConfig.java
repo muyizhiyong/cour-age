@@ -5,10 +5,12 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.amqp.SimpleRabbitListenerContainerFactoryConfigurer;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,6 +55,7 @@ public class RabbitMqConfig<Rabbit> {
         bindingOther2BootMessage().forEach(rabbitAdmin::declareBinding);
         return rabbitAdmin;
     }
+
     public List<Queue> boot2otherQueue() {
         List<Queue> queueList = new ArrayList<>();
         boot2other.values().forEach(s -> queueList.add(new Queue(s)));

@@ -158,14 +158,15 @@ dependencies {
 
     compile project(":handler:handler-sdk")
 
-    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+    compile project(":auth:auth-api")
+    compile project(":auth:auth-impl")
+
     compileOnly "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"
-    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
     compileOnly "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
 }
 
 
-// 单体启动打包到 build/publish/
+// 启动打包到 build/publish/
 apply plugin: 'org.springframework.boot'
 bootJar {
     doLast {
@@ -173,14 +174,7 @@ bootJar {
             from("$rootDir/bins/")
             into("$buildDir/publish")
         }
-        copy {
-            from("$rootDir/resources/")
-            into("$buildDir/publish/resources")
-        }
-        copy {
-            from("$buildDir/libs/")
-            into("$buildDir/publish/")
-        }
+       
     }
 }
 

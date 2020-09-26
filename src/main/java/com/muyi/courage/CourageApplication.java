@@ -15,7 +15,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableSwagger2
 @EnableKnife4j
 @EnableTransactionManagement
-@EnableFeignClients
+//@EnableFeignClients
 public class CourageApplication {
 
 	public static void main(String[] args) {
