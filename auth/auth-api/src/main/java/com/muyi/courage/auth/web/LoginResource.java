@@ -2,10 +2,13 @@ package com.muyi.courage.auth.web;
 
 import com.muyi.courage.auth.dto.LoginResultDTO;
 import com.muyi.courage.auth.dto.UserDTO;
+import com.muyi.courage.common.dto.DTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author 杨志勇
@@ -15,7 +18,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface LoginResource {
 
     @PostMapping("/auth/login")
-    @ApiOperation(value = "PC端，回调登录", notes = "PC端，回调登录")
+    @ApiOperation(value = "登录", notes = "登录")
     LoginResultDTO authLogin(@RequestBody UserDTO user);
+
+
+    @PostMapping("/auth/refresh")
+    @ApiOperation(value = "刷新", notes = "刷新")
+    LoginResultDTO authRefresh(@RequestBody String refreshToken);
+
+
+    @PostMapping("/auth/loginout")
+    @ApiOperation(value = "PC端，登出", notes = "PC端，登出")
+    DTO authLoginOut(HttpServletRequest request);
 
 }

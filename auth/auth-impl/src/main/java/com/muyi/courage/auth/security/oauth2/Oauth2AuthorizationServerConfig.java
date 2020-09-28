@@ -43,9 +43,6 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
  * ----其抽象类中 {@link AbstractTokenGranter}
  * ------通过{@link AuthorizationServerTokenServices}来创建、刷新、获取token
  * --------其默认的实现类{@link DefaultTokenServices}，会调用tokenStore对创建的token和相关信息存储到对应的实现类中
- *
- * @author 王超
- * @author 杨光
  */
 @EnableAuthorizationServer
 @Configuration
@@ -78,7 +75,7 @@ class Oauth2AuthorizationServerConfig extends AuthorizationServerConfigurerAdapt
 				.accessTokenValiditySeconds(Integer.parseInt(accessTokenValiditySeconds))
 				.refreshTokenValiditySeconds(Integer.parseInt(refreshTokenValiditySeconds))
 				.scopes("all")
-				.redirectUris("http://localhost:9090/callback")
+				.redirectUris("http://localhost:18888/callback")
 				;
 	}
 
