@@ -1,0 +1,11 @@
+
+project('aop-impl') {
+    dependencies {
+        // 依赖common
+        implementation project(':common')
+
+        compileOnly "org.mybatis.spring.boot:mybatis-spring-boot-starter:${springBootMybatisVersion}"
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-aop'
+    }
+}

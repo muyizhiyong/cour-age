@@ -13,3 +13,5 @@ include 'handler:handler-sdk'
 
 include 'auth:auth-api'
 include 'auth:auth-impl'
+
+include 'aop:aop-impl'

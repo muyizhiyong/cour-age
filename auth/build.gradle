@@ -1,8 +1,7 @@
 
 project('auth-api') {
     dependencies {
-
-
+        implementation project(':aop:aop-impl')
 
     }
 }
@@ -11,6 +10,8 @@ project('auth-impl') {
         // 依赖common
         implementation project(':common')
         implementation project(':auth:auth-api')
+
+
 
         implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
 

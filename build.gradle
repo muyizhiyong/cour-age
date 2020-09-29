@@ -161,6 +161,8 @@ dependencies {
     compile project(":auth:auth-api")
     compile project(":auth:auth-impl")
 
+    compile project(":aop:aop-impl")
+
     compileOnly "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"
     compileOnly "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
 }
