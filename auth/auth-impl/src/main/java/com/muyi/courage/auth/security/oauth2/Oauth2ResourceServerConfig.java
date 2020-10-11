@@ -36,8 +36,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
  * --相关的异常处理器，可以重写相关实现来自定义异常
  * ----重写的异常handler，在{@link EnableResourceServer}配置类中被覆盖
  *
- * @author 王超
- * @author 杨光
  */
 @Configuration
 @EnableResourceServer

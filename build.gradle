@@ -95,6 +95,8 @@ allprojects {
         runtimeOnly 'org.springframework.boot:spring-boot-devtools'
         implementation 'org.springframework.boot:spring-boot-starter-validation'
 
+        implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
         // mybatis
         implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:${springBootMybatisVersion}"
         compile "com.github.xiaoymin:knife4j-spring-boot-starter:${knife4jVersion}"
@@ -151,7 +153,6 @@ dependencies {
     compile project(":quartz:quartz-sdk")
     compile project(":quartz:quartz-impl")
 
-
     compile project(":rabbitMq:rabbitMq-api")
     compile project(":rabbitMq:rabbitMq-impl")
     compile project(":rabbitMq:rabbitMq-sdk")
@@ -162,6 +163,9 @@ dependencies {
     compile project(":auth:auth-impl")
 
     compile project(":aop:aop-impl")
+
+    compile project(":mongoDB:mongoDB-api")
+    compile project(":mongoDB:mongoDB-impl")
 
     compileOnly "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"
     compileOnly "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"

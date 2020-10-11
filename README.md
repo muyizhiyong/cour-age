@@ -29,7 +29,7 @@
 |  名称      |    版本号    |  类型 |
 |  ----     |   -------     | ---- |
 |Springboot |2.3.1.RELEASE  |      |
-|Springcloud |2.2.4.RELEASE |      |
+|Springcloud|2.2.4.RELEASE |      |
 |Springsecurity |5.3.3.RELEASE|    |
 |oauth2     |2.3.4.RELEASE  |      |
 |aop        |5.2.7.RELEASE  |      |
@@ -45,3 +45,4 @@
 |rabbitMQ   |3.7.3          |  通讯中间件  |
 |redis      |6.0.8          |  内存数据库  |
 |mysql      |5.7            |  关系型数据库 |
+|mongoDB    |4.2.9          |  文件数据库  |

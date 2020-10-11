@@ -1,0 +1,12 @@
+project('mongoDB-api') {
+  
+}
+project('mongoDB-impl') {
+    dependencies {
+        // 依赖common
+        implementation project(':common')
+        implementation project(':mongoDB:mongoDB-api')
+       
+    }
+}
+

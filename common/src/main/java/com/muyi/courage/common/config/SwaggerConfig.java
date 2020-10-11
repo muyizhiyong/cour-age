@@ -50,6 +50,20 @@ public class SwaggerConfig {
 				;
 	}
 
+	@Bean
+	public Docket api3() {
+		return new Docket(DocumentationType.SWAGGER_2)
+				.useDefaultResponseMessages(false)
+				.groupName("MongoDB模块")
+				.select()
+				.apis(RequestHandlerSelectors.basePackage("com.muyi.courage.mongoDB"))
+				.paths(PathSelectors.any())
+				.build()
+				.securitySchemes(securitySchemes())
+				.securityContexts(securityContexts())
+				;
+	}
+
 	private List<ApiKey> securitySchemes() {
 		List<ApiKey> list = new ArrayList<>();
 		list.add(new ApiKey("Authorization", "Authorization", "header"));

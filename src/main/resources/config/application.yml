@@ -56,11 +56,16 @@ spring:
     listener:
       simple:
         #监听数
-        concurrency: 3
+        concurrency: 1
         #确认消息模式
         acknowledge-mode: manual
         #负载均衡
         prefetch: 1
+  #配置mongoDB
+  data:
+    mongodb:
+      uri: mongodb://47.100.115.11:27017/courage
+
 
 logging:
   config: classpath:logback.xml
