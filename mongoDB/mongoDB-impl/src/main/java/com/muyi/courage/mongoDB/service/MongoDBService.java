@@ -11,4 +11,6 @@ public interface MongoDBService {
    DemoEntityDTO qryOneById(String id);
 
    DTO insert(DemoEntityDTO demoEntityDTO);
+
+   DTO delete(String id);
 }

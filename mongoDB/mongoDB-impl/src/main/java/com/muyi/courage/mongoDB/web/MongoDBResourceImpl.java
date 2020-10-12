@@ -29,4 +29,9 @@ public class MongoDBResourceImpl implements MongoDbResource {
     public DTO insert(DemoEntityDTO demoEntityDTO) {
         return mongoDBService.insert(demoEntityDTO);
     }
+
+    @Override
+    public DTO delete(String id) {
+        return mongoDBService.delete(id);
+    }
 }

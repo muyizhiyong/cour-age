@@ -61,4 +61,16 @@ public class MongoDbServiceImpl implements MongoDBService {
         return dto;
     }
 
+    @Override
+    public DTO delete(String id) {
+        DTO dto = new DTO(RetCodeEnum.FAIL);
+        try {
+            mongoTemplate.remove(id);
+            dto.setResult(RetCodeEnum.SUCCEED);
+        }catch (Exception e){
+            log.error("[delete] error! e:{}",e.getMessage());
+        }
+        return dto;
+    }
+
 }
