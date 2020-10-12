@@ -65,8 +65,14 @@ public class MongoDbServiceImpl implements MongoDBService {
     public DTO delete(String id) {
         DTO dto = new DTO(RetCodeEnum.FAIL);
         try {
-            mongoTemplate.remove(id);
-            dto.setResult(RetCodeEnum.SUCCEED);
+            Query query=new Query(Criteria.where("id").is(id));
+            DemoEntityDO demoEntityDO =  mongoTemplate.findOne(query , DemoEntityDO.class);
+            if(demoEntityDO !=null){
+                mongoTemplate.remove(demoEntityDO);
+                dto.setResult(RetCodeEnum.SUCCEED);
+            }else {
+                dto.setResult(RetCodeEnum.AUDIT_OBJECT_DELETED);
+            }
         }catch (Exception e){
             log.error("[delete] error! e:{}",e.getMessage());
         }
