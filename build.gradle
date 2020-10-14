@@ -167,6 +167,8 @@ dependencies {
     compile project(":mongoDB:mongoDB-api")
     compile project(":mongoDB:mongoDB-impl")
 
+    compile project(":algorithm:algorithm-sdk")
+
     compileOnly "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"
     compileOnly "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
 }
