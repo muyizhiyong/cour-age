@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,10 +20,13 @@ public interface MongoDbResource {
 
     String PREFIX = "mongoDB/api";
 
-    @GetMapping(PREFIX + "/qry")
+    @GetMapping(PREFIX + "/qryOneById")
     @ApiOperation(value = "根据ID查询(一条)", notes = "根据ID查询(一条)")
     DemoEntityDTO qryOneById(@RequestParam String id);
 
+    @GetMapping(PREFIX + "/qryListByName")
+    @ApiOperation(value = "根据名称查询(多条)", notes = "根据名称查询(多条)")
+    List<DemoEntityDTO> qryListByName(@RequestParam String name);
 
     @PostMapping(PREFIX+"/insert")
     @ApiOperation(value = "保存", notes = "保存")
