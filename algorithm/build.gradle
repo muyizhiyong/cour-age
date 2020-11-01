@@ -1,0 +1,8 @@
+project('algorithm-sdk') {
+    dependencies {
+        // 依赖common
+        implementation project(':common')
+       
+    }
+}
+

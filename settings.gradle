@@ -18,3 +18,5 @@ include 'aop:aop-impl'
 
 include 'mongoDB:mongoDB-api'
 include 'mongoDB:mongoDB-impl'
+
+include 'algorithm:algorithm-sdk'

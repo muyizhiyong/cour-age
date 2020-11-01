@@ -7,6 +7,8 @@ import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 
 @Mapper
 public interface DemoEntityConverter {
@@ -19,6 +21,8 @@ public interface DemoEntityConverter {
 
 	DemoEntityDO dto2do(DemoEntityDTO demoEntityDTO);
 
+	List<DemoEntityDTO> domian2dto(List<DemoEntityDO> demoEntityDOS);
 
+	List<DemoEntityDO> dto2do(List<DemoEntityDTO> demoEntityDTOS);
 }
 

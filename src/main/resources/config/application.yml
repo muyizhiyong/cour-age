@@ -64,7 +64,11 @@ spring:
   #配置mongoDB
   data:
     mongodb:
-      uri: mongodb://47.100.115.11:27017/courage
+      host: 47.100.115.11
+      port: 27017
+      database: courage
+      username: courage
+      password: courage
 
 
 logging:
