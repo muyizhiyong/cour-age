@@ -36,7 +36,7 @@ spring:
       connection-timeout: 60000
   redis:
     database: 0
-    host: 127.0.0.1
+    host: 47.100.115.11
     port: 6379
     password: root
     timeout: 60000 #连接超时时间（毫秒）
@@ -52,7 +52,7 @@ spring:
     addresses: 47.100.115.11:5672,47.100.115.11:5673,47.100.115.11:5674
     username: admin
     password: admin
-    virtual-host: /courage
+    virtual-host: courage
     listener:
       simple:
         #监听数

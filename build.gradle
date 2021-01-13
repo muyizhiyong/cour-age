@@ -169,6 +169,9 @@ dependencies {
 
     compile project(":algorithm:algorithm-sdk")
 
+    compile project(":user-module:uesr-api")
+    compile project(":user-module:uesr-impl")
+
     compileOnly "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"
     compileOnly "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
 }

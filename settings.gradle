@@ -20,3 +20,6 @@ include 'mongoDB:mongoDB-api'
 include 'mongoDB:mongoDB-impl'
 
 include 'algorithm:algorithm-sdk'
+
+include 'user-module:user-api'
+include 'user-module:uesr-impl'
