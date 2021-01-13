@@ -1,0 +1,14 @@
+project('user-api') {
+    dependencies {
+        implementation project(':user-module:user-impl')
+
+    }
+}
+project('user-impl') {
+    dependencies {
+        // 依赖common
+        implementation project(':common')
+        implementation project(':user-module:user-api')
+
+    }
+}
