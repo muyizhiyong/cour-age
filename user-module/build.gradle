@@ -1,6 +1,5 @@
 project('user-api') {
     dependencies {
-        implementation project(':user-module:user-impl')
 
     }
 }

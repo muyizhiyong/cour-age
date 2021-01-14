@@ -169,8 +169,8 @@ dependencies {
 
     compile project(":algorithm:algorithm-sdk")
 
-    compile project(":user-module:uesr-api")
-    compile project(":user-module:uesr-impl")
+    compile project(":user-module:user-api")
+    compile project(":user-module:user-impl")
 
     compileOnly "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"
     compileOnly "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
@@ -182,7 +182,7 @@ apply plugin: 'org.springframework.boot'
 bootJar {
     doLast {
         copy {
-            from("$rootDir/bins/")
+            from("$rootDir/A-bins/")
             into("$buildDir/publish")
         }
        

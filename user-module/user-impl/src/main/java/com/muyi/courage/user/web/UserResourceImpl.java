@@ -14,10 +14,11 @@ import java.util.Map;
  * @date 2021-01-13 22:22
  */
 @Api(value = "用户模块：用户管理接口", tags = {"用户模块：用户管理接口"})
-public interface UserResource {
+public class UserResourceImpl implements  UserResource{
 
-    @PostMapping("/user")
-    @ApiOperation(value = "添加用户", notes = "添加用户")
-    DTO addUser(@RequestBody Map<String,Object> map);
 
+    @Override
+    public DTO addUser(Map<String, Object> map) {
+        return null;
+    }
 }
