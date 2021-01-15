@@ -31,6 +31,9 @@
 - algorithm 算法库
     - search 搜索算法
     - sort 排序算法
+- user 用户模块
+    - 添加用户
+    
     
 ## 项目核心依赖
 |  名称      |    版本号    |  类型 |
@@ -53,3 +56,9 @@
 |redis      |6.0.8          |  内存数据库  |
 |mysql      |5.7            |  关系型数据库 |
 |mongoDB    |4.2.9          |  文件数据库  |
+
+
+## 项目自测knife4j
+浏览器访问：http://localhost:18888/doc.html
+管理员：admin/12345678
+
