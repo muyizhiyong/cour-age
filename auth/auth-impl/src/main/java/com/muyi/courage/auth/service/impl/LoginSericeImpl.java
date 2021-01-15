@@ -39,7 +39,6 @@ public class LoginSericeImpl implements LoginService {
             dto.setRetMsg("用户名不正确！");
             return dto;
         }
-        log.debug("[checkUser] password:"+sysUserPO.getPassword());
         if (!passwordEncoder.matches(password, sysUserPO.getPassword())) {
             dto.setRetMsg("密码不正确！");
             return dto;

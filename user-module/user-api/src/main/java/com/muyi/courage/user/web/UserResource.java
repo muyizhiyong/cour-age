@@ -1,6 +1,7 @@
 package com.muyi.courage.user.web;
 
 import com.muyi.courage.common.dto.DTO;
+import com.muyi.courage.user.dto.UserDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,6 @@ public interface UserResource {
 
     @PostMapping("/user")
     @ApiOperation(value = "添加用户", notes = "添加用户")
-    DTO addUser(@RequestBody Map<String,Object> map);
+    DTO addUser(@RequestBody UserDTO userDTO);
 
 }

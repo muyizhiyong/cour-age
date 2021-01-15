@@ -53,7 +53,6 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
 		String password = (String) authentication.getCredentials();
 
 		log.debug("[authenticate] username:"+username);
-		log.debug("[authenticate] password:"+password);
 
 		// 数据库根据用户名查询
 		UserDetails userDetails = userDetailService.loadUserByUsername(username);
