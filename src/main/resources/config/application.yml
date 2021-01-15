@@ -1,5 +1,6 @@
 server:
-  port: 18888
+  port: 18881
+  non-ssl-port: 18888
   tomcat:
     uri-encoding: UTF-8
     ## 等待队列长度，默认100。
@@ -11,6 +12,12 @@ server:
       max: 800
       ## 最小工作空闲线程数，默认10
       min-spare: 100
+  ssl:
+    enabled: true
+    protocol: TLS
+    key-store: classpath:tomcat.keystore
+    key-password: 123456
+    key-store-type: JKS
 
 spring:
   main:
