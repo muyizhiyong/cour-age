@@ -9,6 +9,7 @@ import com.muyi.courage.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -28,8 +29,10 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public DTO addUser(UserDTO userDTO) {
         DTO dto = new DTO(RetCodeEnum.FAIL);
+
         //TODO check userDTO
 
         UserDO domain = new UserDO();
@@ -37,7 +40,6 @@ public class UserServiceImpl implements UserService {
         domain.setUserName(userDTO.getUserName());
         domain.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()).replace("{bcrypt}", ""));
         domain.setStatus(1);
-
 
         if (userMapper.insert(domain) == 1) {
             dto.setResult(RetCodeEnum.SUCCEED);
