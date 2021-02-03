@@ -68,6 +68,19 @@ public class SwaggerConfig {
 	public Docket api4() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.useDefaultResponseMessages(false)
+				.groupName("推送模块")
+				.select()
+				.apis(RequestHandlerSelectors.basePackage("com.muyi.courage.push"))
+				.paths(PathSelectors.any())
+				.build()
+				.securitySchemes(securitySchemes())
+				.securityContexts(securityContexts())
+				;
+	}
+	@Bean
+	public Docket api5() {
+		return new Docket(DocumentationType.SWAGGER_2)
+				.useDefaultResponseMessages(false)
 				.groupName("用户模块")
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("com.muyi.courage.user"))

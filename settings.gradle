@@ -23,3 +23,6 @@ include 'algorithm:algorithm-sdk'
 
 include 'user-module:user-api'
 include 'user-module:user-impl'
+
+include 'push-module:push-api'
+include 'push-module:push-impl'

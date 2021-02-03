@@ -16,8 +16,9 @@ import java.util.Map;
  */
 @Api(value = "用户模块：用户管理接口", tags = {"用户模块：用户管理接口"})
 public interface UserResource {
+    String PREFIX = "/user-module/user";
 
-    @PostMapping("/user")
+    @PostMapping(PREFIX)
     @ApiOperation(value = "添加用户", notes = "添加用户")
     DTO addUser(@RequestBody UserDTO userDTO);
 

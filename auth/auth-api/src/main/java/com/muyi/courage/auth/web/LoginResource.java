@@ -17,17 +17,19 @@ import javax.servlet.http.HttpServletRequest;
 @Api(value = "权限模块：系统登录接口", tags = {"权限模块：系统接口"})
 public interface LoginResource {
 
-    @PostMapping("/auth/login")
+    String PREFIX = "/auth";
+
+    @PostMapping(PREFIX+"/login")
     @ApiOperation(value = "登录", notes = "登录")
     LoginResultDTO authLogin(@RequestBody UserDTO user);
 
 
-    @PostMapping("/auth/refresh")
+    @PostMapping(PREFIX+"/refresh")
     @ApiOperation(value = "刷新", notes = "刷新")
     LoginResultDTO authRefresh(@RequestBody String refreshToken);
 
 
-    @PostMapping("/auth/loginout")
+    @PostMapping(PREFIX+"/loginout")
     @ApiOperation(value = "PC端，登出", notes = "PC端，登出")
     DTO authLoginOut(HttpServletRequest request);
 

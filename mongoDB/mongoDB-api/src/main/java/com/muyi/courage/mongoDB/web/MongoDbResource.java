@@ -18,7 +18,7 @@ import java.util.Map;
 @Api(value = "mongoDB：mongoDB",tags = {"mongoDB：mongoDB"})
 public interface MongoDbResource {
 
-    String PREFIX = "mongoDB/api";
+    String PREFIX = "/mongoDB/api";
 
     @GetMapping(PREFIX + "/qryOneById")
     @ApiOperation(value = "根据ID查询(一条)", notes = "根据ID查询(一条)")

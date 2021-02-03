@@ -172,6 +172,9 @@ dependencies {
     compile project(":user-module:user-api")
     compile project(":user-module:user-impl")
 
+    compile project(":push-module:push-api")
+    compile project(":push-module:push-impl")
+
     compileOnly "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"
     compileOnly "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
 }

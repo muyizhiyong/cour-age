@@ -1,0 +1,17 @@
+project('push-api') {
+    dependencies {
+
+    }
+}
+project('push-impl') {
+    dependencies {
+        // 依赖common
+        implementation project(':common')
+        implementation project(':push-module:push-api')
+
+        compile 'org.springframework.boot:spring-boot-starter-websocket'
+        compile 'org.springframework.boot:spring-boot-starter-mail'
+        compile group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.10.RELEASE'
+
+    }
+}

@@ -58,6 +58,7 @@ public class Oauth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
 				.antMatchers("/", "/swagger-ui.html", "/v2/**", "/webjars/**", "/doc.html/**", "/swagger-resources/**").permitAll()
 				.antMatchers("/auth/**").permitAll()
 				.antMatchers("/oauth/**").permitAll()
+				.antMatchers("/push-module/websocket").permitAll()
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 				.anyRequest().authenticated()
 
@@ -67,6 +68,7 @@ public class Oauth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
 				.antMatchers("/", "/swagger-ui.html", "/v2/**", "/webjars/**", "/swagger-resources/**")
 				.antMatchers("/auth/**")
 				.antMatchers("/oauth/**")
+				.antMatchers("push-module/websocket")
 				.antMatchers(HttpMethod.OPTIONS, "/**")
 				.anyRequest()
 

@@ -19,7 +19,7 @@ import java.util.Map;
 @Api(value = "通讯：rabbitMq",tags = {"通讯：rabbitMq"})
 public interface Other2BootResource {
 
-	String PREFIX = "rabbitMq/other2boot";
+	String PREFIX = "/rabbitMq/info";
 
 	@GetMapping(PREFIX+"/send2Boot")
 	@ApiOperation(value = "向应用发送消息", notes = "向应用发送消息")
