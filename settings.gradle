@@ -27,4 +27,6 @@ include 'user-module:user-impl'
 include 'push-module:push-api'
 include 'push-module:push-impl'
 
-include 'demoForLambda' 
+include 'demoForLambda'
+
+include 'demoForSingleton'
