@@ -22,6 +22,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -35,8 +36,31 @@ import java.nio.charset.StandardCharsets;
 @RestController
 public class LoginResourceImpl implements LoginResource{
 
-    @Value("${server.port:18888}")
+    private static String LOCAL_PORT = "18888";
+
+    @Value("${server.non-ssl-port}")
+    private String nonsslport;
+
+    @Value("${server.port}")
     private String port;
+
+    @Value("${server.ssl.enabled:false}")
+    private Boolean sslFlag;
+
+    @PostConstruct
+    public void init(){
+        //不使用ssl
+        if(sslFlag !=null && sslFlag == false){
+            LOCAL_PORT = port;
+        }else {
+            //使用ssl
+            if(nonsslport ==null || "".equals(nonsslport)){
+                LOCAL_PORT = port;
+            }else{
+                LOCAL_PORT = nonsslport;
+            }
+        }
+    }
 
     @Resource
     private LoginService loginService;
@@ -64,7 +88,7 @@ public class LoginResourceImpl implements LoginResource{
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "password");
-        params.add("username", user.getUserNo());
+        params.add("username", user.getUserName());
         params.add("password", user.getPassword());
 
         String clientId = "pc-web";
@@ -73,7 +97,7 @@ public class LoginResourceImpl implements LoginResource{
 
         params.add("scopes", "all");
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
-        ResponseEntity<String> response = restTemplate.postForEntity("http://127.0.0.1:" + port.trim() + "/oauth/token", requestEntity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("http://127.0.0.1:" + LOCAL_PORT.trim() + "/oauth/token", requestEntity, String.class);
         log.debug("[callback response]: {}", response);
         return createLoginResultDTO(response);
     }
@@ -97,7 +121,7 @@ public class LoginResourceImpl implements LoginResource{
         //params.add("client_secret", "12345678");
 
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
-        ResponseEntity<String> response = restTemplate.postForEntity("http://127.0.0.1:" + port.trim() + "/oauth/token", requestEntity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("http://127.0.0.1:" + LOCAL_PORT.trim() + "/oauth/token", requestEntity, String.class);
         log.debug("[callback response]: {}", response);
         return createLoginResultDTO(response);
     }

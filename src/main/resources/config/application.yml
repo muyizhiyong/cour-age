@@ -1,6 +1,5 @@
 server:
   port: 18881
-  non-ssl-port: 18888
   tomcat:
     uri-encoding: UTF-8
     ## 等待队列长度，默认100。
@@ -12,6 +11,7 @@ server:
       max: 800
       ## 最小工作空闲线程数，默认10
       min-spare: 100
+  non-ssl-port: 18888
   ssl:
     enabled: true
     protocol: TLS
@@ -46,6 +46,7 @@ spring:
     host: 47.100.115.11
     port: 6379
     password: root
+
     timeout: 60000 #连接超时时间（毫秒）
     lettuce:
       shutdown-timeout: 300ms #关闭超时
@@ -132,4 +133,7 @@ rabbitmq:
 auth:
   accessTokenValiditySeconds: 1800
   refreshTokenValiditySeconds: 3600
+
+redis:
+  prefix: 'iCourage:'
 # management.endpoints.web.exposure.include: '*'

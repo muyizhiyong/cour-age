@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SysUserMapper {
 
-	int selectCountByUserNo(String userNo);
+	int selectCountByUserName(String userName);
 
 	SysUserPO selectByPrimaryKey(String username);
 }

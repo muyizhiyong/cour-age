@@ -15,9 +15,9 @@ import lombok.Setter;
 public class UserDTO {
     private static final long serialVersionUID = 1L;
 
-    private String userNo;
-
     private String userName;
+
+    private String name;
 
     private String password;
 

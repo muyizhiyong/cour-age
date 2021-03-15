@@ -37,7 +37,7 @@ public class LoginUserDetailsServiceImpl implements UserDetailsService {
 		}
 		PrivateUserDetails privateUserDetails = new PrivateUserDetails();
 		privateUserDetails.setPassword(sysUserPO.getPassword());
-		privateUserDetails.setUsername(sysUserPO.getUserNo()); //此处有区别，账号为系统表userNO
+		privateUserDetails.setUsername(sysUserPO.getUserName()); //此处有区别，账号为系统表userNO
 		log.debug("[loadUserByUsername] end ");
 		return privateUserDetails;
 	}

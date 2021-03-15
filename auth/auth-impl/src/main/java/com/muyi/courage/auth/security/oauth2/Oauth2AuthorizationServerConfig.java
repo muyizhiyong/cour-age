@@ -53,6 +53,9 @@ class Oauth2AuthorizationServerConfig extends AuthorizationServerConfigurerAdapt
 	@Value("${auth.refreshTokenValiditySeconds}")
 	private String refreshTokenValiditySeconds;
 
+	@Value("${redis.prefix}")
+	private String redisPrefix;
+
 	private final AuthenticationManager authenticationManager;
 
 	private final UserDetailsService userDetailsService;
@@ -107,7 +110,11 @@ class Oauth2AuthorizationServerConfig extends AuthorizationServerConfigurerAdapt
 
 	@Bean("redisTokenStore")
 	public TokenStore redisTokenStore() {
-		return new RedisTokenStore(authAdminRedisTemplate.getRequiredConnectionFactory());
+		RedisTokenStore redisTokenStore = new RedisTokenStore(authAdminRedisTemplate.getRequiredConnectionFactory());
+		if (redisPrefix != null && !"".equals(redisPrefix)) {
+			redisTokenStore.setPrefix(redisPrefix);
+		}
+		return redisTokenStore;
 	}
 
 	/**

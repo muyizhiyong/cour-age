@@ -30,11 +30,11 @@ public class LoginSericeImpl implements LoginService {
     @Override
     public DTO checkUser(UserDTO user) {
         DTO dto = new DTO(RetCodeEnum.FAIL);
-        String userNo = user.getUserNo();
+        String userName = user.getUserName();
         String password = user.getPassword();
-        log.debug("[checkUser] userNo:"+userNo);
+        log.debug("[checkUser] userName:"+userName);
         log.debug("[checkUser] password:"+password);
-        SysUserPO sysUserPO = sysUserMapper.selectByPrimaryKey(userNo);
+        SysUserPO sysUserPO = sysUserMapper.selectByPrimaryKey(userName);
         if (sysUserPO == null) {
             dto.setRetMsg("用户名不正确！");
             return dto;
