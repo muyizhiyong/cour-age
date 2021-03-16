@@ -8,7 +8,8 @@ project('push-impl') {
         // 依赖common
         implementation project(':common')
         implementation project(':push-module:push-api')
-
+        implementation project(':user-module:user-api')
+        
         compile 'org.springframework.boot:spring-boot-starter-websocket'
         compile 'org.springframework.boot:spring-boot-starter-mail'
         compile group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.10.RELEASE'

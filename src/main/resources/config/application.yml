@@ -13,7 +13,7 @@ server:
       min-spare: 100
   non-ssl-port: 18888
   ssl:
-    enabled: true
+    enabled: false
     protocol: TLS
     key-store: classpath:tomcat.keystore
     key-password: 123456
@@ -45,8 +45,7 @@ spring:
     database: 0
     host: 47.100.115.11
     port: 6379
-    password: root
-
+    password: root123
     timeout: 60000 #连接超时时间（毫秒）
     lettuce:
       shutdown-timeout: 300ms #关闭超时
@@ -77,7 +76,20 @@ spring:
       database: courage
       username: courage
       password: courage
-
+  mail:
+    host: smtp.163.com
+    port: 25
+    default-encoding: utf-8
+    username: muyi_zhiyong@163.com
+    password: yzy587587YZY
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 
 logging:
   config: classpath:logback.xml
