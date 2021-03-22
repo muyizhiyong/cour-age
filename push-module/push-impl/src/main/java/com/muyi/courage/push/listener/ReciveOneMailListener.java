@@ -319,8 +319,14 @@ public class ReciveOneMailListener {
         store.connect();
         Folder folder = store.getFolder("INBOX");
         folder.open(Folder.READ_ONLY);
+
         Message message[] = folder.getMessages();
-        System.out.println("Messages's length: " + message.length);
+        System.out.println("收件箱中共" + message.length + "封邮件!");
+        System.out.println("收件箱中共" + folder.getUnreadMessageCount() + "封未读邮件!");
+        System.out.println("收件箱中共" + folder.getNewMessageCount() + "封新邮件!");
+        System.out.println("收件箱中共" + folder.getDeletedMessageCount() + "封已删除邮件!");
+
+        System.out.println("------------------------开始解析邮件----------------------------------");
         ReciveOneMailListener pmm = null;
         for (int i = 0; i < message.length; i++) {
             System.out.println("======================");
@@ -344,6 +350,12 @@ public class ReciveOneMailListener {
            // pmm.setAttachPath("c:\\");
             //pmm.saveAttachMent((Part) message[i]);
         }
+        System.out.println("\t未读邮件数：" + folder.getUnreadMessageCount());
+        System.out.println("\t新邮件数：" + folder.getNewMessageCount());
+        System.out.println("----------------End------------------");
+
+        folder.close();
+        store.close();
     }
 
 }
