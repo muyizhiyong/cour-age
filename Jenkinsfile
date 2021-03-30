@@ -13,8 +13,8 @@ pipeline {
                      sh 'pwd'
                      sh 'ls -al'
                      sh 'ls -al /root/.gradle/'
-                     sh '/opt/gradle-4.10.3/bin/gradle clean '
-                     sh '/opt/gradle-4.10.3/bin/gradle bootjar  '
+                     sh '/home/muyi/soft/gradle-6.4.1/gradle clean '
+                     sh '/home/muyi/soft/gradle-6.4.1/gradle bootjar  '
                  }
              }
          }
