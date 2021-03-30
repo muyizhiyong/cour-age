@@ -189,7 +189,14 @@ bootJar {
             from("$rootDir/A-bins/")
             into("$buildDir/publish")
         }
-       
+        copy {
+            from("$rootDir/src/main/resources/")
+            into("$buildDir/publish")
+        }
+        copy {
+            from("$buildDir/libs/")
+            into("$buildDir/publish/")
+        }
     }
 }
 
