@@ -14,8 +14,18 @@ pipeline {
                      sh 'ls -al'
                      sh 'ls -al /root/.gradle/'
                      sh '/home/muyi/soft/gradle-6.4.1/bin/gradle clean '
-                   //  sh '/home/muyi/soft/gradle-6.4.1/bin/gradle bootJar -Dorg.gradle.java.home=/home/muyi/soft/jdk1.8.0_161 '
+                   //  sh '/home/muyi/soft/gradle-6.4.1/bin/gradle bootJar -Xms512m -Xmx1024m -XX:MaxPermSize=1024m  -Dorg.gradle.java.home=/home/muyi/soft/jdk1.8.0_161 '
                  }
+             }
+         }
+         stage('Build by Docker') {
+            steps {
+                  cript {
+                      sh 'pwd'
+                      sh 'ls -al'
+                      sh 'ls -al ./build/libs'
+                      sh 'docker build -t ${APP_PREFIX}/${APP_NAME}:${APP_VERSION} ./build/publish'
+                   }
              }
          }
          stage('Run') {
