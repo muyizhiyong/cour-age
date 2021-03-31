@@ -1,4 +1,4 @@
-FROM jdk:8-en_US.UTF-8
+FROM majiajue/jdk1.8
 VOLUME /tmp
 ADD courage-1.0.0-SNAPSHOT.jar /opt/app.jar
 ADD resources /opt/resources
