@@ -190,8 +190,12 @@ bootJar {
             into("$buildDir/publish")
         }
         copy {
+            from("$rootDir/resources/")
+            into("$buildDir/publish/resources")
+        }
+        copy {
             from("$rootDir/src/main/resources/")
-            into("$buildDir/publish")
+            into("$buildDir/publish/")
         }
         copy {
             from("$buildDir/libs/")
