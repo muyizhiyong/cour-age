@@ -20,7 +20,7 @@ pipeline {
          }
          stage('Build by Docker') {
             steps {
-                  cript {
+                  script {
                       sh 'pwd'
                       sh 'ls -al'
                       sh 'ls -al ./build/libs'
