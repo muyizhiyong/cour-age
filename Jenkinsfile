@@ -14,7 +14,7 @@ pipeline {
                      sh 'ls -al'
                      sh 'ls -al /root/.gradle/'
                      sh '/home/muyi/soft/gradle-6.4.1/bin/gradle clean '
-                   //  sh '/home/muyi/soft/gradle-6.4.1/bin/gradle bootJar -Xms512m -Xmx1024m -XX:MaxPermSize=1024m  -Dorg.gradle.java.home=/home/muyi/soft/jdk1.8.0_161 '
+                     sh '/home/muyi/soft/gradle-6.4.1/bin/gradle bootJar -Xms512m -Xmx1024m -XX:MaxPermSize=1024m  -Dorg.gradle.java.home=/home/muyi/soft/jdk1.8.0_161 '
                  }
              }
          }
