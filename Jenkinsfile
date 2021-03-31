@@ -23,7 +23,8 @@ pipeline {
                   script {
                       sh 'pwd'
                       sh 'ls -al'
-                      sh 'ls -al ./build/libs'
+                      sh 'cp Dockerfile ./build/publish/'
+                      sh 'ls -al ./build/publish'
                       sh 'docker build -t ${APP_PREFIX}/${APP_NAME}:${APP_VERSION} ./build/publish'
                    }
              }
