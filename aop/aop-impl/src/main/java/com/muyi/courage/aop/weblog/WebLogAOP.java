@@ -2,6 +2,8 @@ package com.muyi.courage.aop.weblog;
 
 import com.muyi.courage.aop.po.WebLogPO;
 import com.muyi.courage.aop.repository.SysLogMapper;
+import com.muyi.courage.common.annotation.DBMaster;
+import com.muyi.courage.common.config.DBContextHolder;
 import com.muyi.courage.common.dto.DTO;
 import com.muyi.courage.common.util.CalendarUtil;
 import com.muyi.courage.common.util.ServletRequestUtil;
@@ -53,6 +55,9 @@ public class WebLogAOP {
 
         if (serial.get() == 0){
             try {
+                //操作日志记录，数据库切到主库中。
+                DBContextHolder.master();
+
                 log.debug("[webReqLogAop] start!");
                 //获取当前请求对象
                 ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();

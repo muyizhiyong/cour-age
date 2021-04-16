@@ -13,12 +13,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @ApiModel(value = "用户", description = "用户")
-public class UserDTO {
+public class UserDTO extends DTO {
     private static final long serialVersionUID = 1L;
 
-    private String userNo;
-
     private String userName;
+
+    private String name;
 
     private String password;
 

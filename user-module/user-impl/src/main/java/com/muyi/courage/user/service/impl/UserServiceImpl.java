@@ -1,9 +1,12 @@
 package com.muyi.courage.user.service.impl;
 
+import com.muyi.courage.common.annotation.DBMaster;
 import com.muyi.courage.common.dto.DTO;
 import com.muyi.courage.common.util.RetCodeEnum;
 import com.muyi.courage.user.domain.UserDO;
 import com.muyi.courage.user.dto.UserDTO;
+import com.muyi.courage.user.mapstruct.UserConverter;
+import com.muyi.courage.user.po.UserPO;
 import com.muyi.courage.user.repository.UserMapper;
 import com.muyi.courage.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,8 +39,8 @@ public class UserServiceImpl implements UserService {
         //TODO check userDTO
 
         UserDO domain = new UserDO();
-        domain.setUserNo(userDTO.getUserNo());
         domain.setUserName(userDTO.getUserName());
+        domain.setName(userDTO.getName());
         domain.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()).replace("{bcrypt}", ""));
         domain.setStatus(1);
 
@@ -46,5 +49,16 @@ public class UserServiceImpl implements UserService {
             return dto;
         }
         return new DTO(RetCodeEnum.FAIL);
+    }
+
+//    @DBMaster
+    @Override
+    public UserDTO qryByName(String name) {
+        UserDTO userDTO = new UserDTO();
+
+        UserDO userDO = userMapper.selectByName(name);
+
+        userDTO = UserConverter.INSTANCE.domain2dto(userDO);
+        return userDTO;
     }
 }

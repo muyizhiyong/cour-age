@@ -11,7 +11,7 @@ server:
       max: 800
       ## 最小工作空闲线程数，默认10
       min-spare: 100
-  non-ssl-port: 18888
+  non-ssl-port: 18882
   ssl:
     enabled: false
     protocol: TLS
@@ -30,17 +30,36 @@ spring:
   application:
     name: courage
   datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://47.100.115.11:3306/courage?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
-    username: root
-    password: root
-    driver-class-name: com.mysql.jdbc.Driver
-    hikari:
-      minimum-idle: 10
-      maximum-pool-size: 60
-      idle-timeout: 30000
-      validation-timeout: 3000
-      connection-timeout: 60000
+#    type: com.zaxxer.hikari.HikariDataSource
+#    url: jdbc:mysql://47.100.115.11:3306/courage?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+#    username: root
+#    password: root
+#    driver-class-name: com.mysql.jdbc.Driver
+#    hikari:
+#      minimum-idle: 10
+#      maximum-pool-size: 60
+#      idle-timeout: 30000
+#      validation-timeout: 3000
+#      connection-timeout: 60000
+    master:
+      jdbc-url: jdbc:mysql://47.100.115.11:3306/courage?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+      type: com.zaxxer.hikari.HikariDataSource
+    slave1:
+      jdbc-url: jdbc:mysql://47.100.115.11:3306/courage_slave1?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+      type: com.zaxxer.hikari.HikariDataSource
+    slave2:
+      jdbc-url: jdbc:mysql://47.100.115.11:3306/courage_slave2?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+      type: com.zaxxer.hikari.HikariDataSource
+
   redis:
     database: 0
     host: 47.100.115.11
@@ -148,4 +167,8 @@ auth:
 
 redis:
   prefix: 'iCourage:'
-# management.endpoints.web.exposure.include: '*'
+
+management:
+  health:
+    db:
+      enabled: false

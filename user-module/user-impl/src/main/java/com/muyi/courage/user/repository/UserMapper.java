@@ -12,11 +12,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 
-    UserPO selectByPrimaryKey(String userno);
+    UserDO selectByPrimaryKey(String username);
+
+    UserDO selectByName(String name);
 
     @Insert({
-            "insert into SYS_USER (USER_NO, USER_NAME, PASSWORD, STATUS)",
-            "values (#{userNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, " +
+            "insert into SYS_USER (USER_NAME, NAME, PASSWORD, STATUS)",
+            "values (#{userName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, " +
                     "#{password,jdbcType=VARCHAR}, #{status,jdbcType=NUMERIC})"
     })
     int insert(UserDO record);

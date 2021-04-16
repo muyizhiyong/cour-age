@@ -9,4 +9,6 @@ import com.muyi.courage.user.dto.UserDTO;
  */
 public interface UserService {
     DTO addUser(UserDTO userDTO);
+
+    UserDTO qryByName(String name);
 }

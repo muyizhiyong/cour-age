@@ -1,5 +1,6 @@
 package com.muyi.courage.mongoDB.service.impl;
 
+import com.muyi.courage.common.annotation.MongoDB;
 import com.muyi.courage.common.dto.DTO;
 import com.muyi.courage.common.util.RetCodeEnum;
 import com.muyi.courage.mongoDB.domain.DemoEntityDO;
@@ -39,6 +40,7 @@ public class MongoDbServiceImpl implements MongoDBService {
     private DataSourceTransactionManager dataSourceTransactionManager;
 
     @Override
+    @MongoDB
     public DemoEntityDTO qryOneById(String id) {
         log.debug("[qryOneById] id:{}",id);
         DemoEntityDTO demoEntityDTO = new DemoEntityDTO(RetCodeEnum.FAIL);
@@ -59,6 +61,7 @@ public class MongoDbServiceImpl implements MongoDBService {
     }
 
     @Override
+    @MongoDB
     @Transactional(transactionManager = "mongoTransactionManager",rollbackFor = Exception.class)
     public DTO insert(DemoEntityDTO demoEntityDTO) {
         DTO dto = new DTO(RetCodeEnum.FAIL);
@@ -73,6 +76,7 @@ public class MongoDbServiceImpl implements MongoDBService {
     }
 
     @Override
+    @MongoDB
     @Transactional(transactionManager = "mongoTransactionManager",rollbackFor = Exception.class)
     public DTO delete(String id) {
         DTO dto = new DTO(RetCodeEnum.FAIL);
@@ -90,6 +94,7 @@ public class MongoDbServiceImpl implements MongoDBService {
     }
 
     @Override
+    @MongoDB
     public List<DemoEntityDTO> qryListByName(String name) {
         List<DemoEntityDTO> retList = new ArrayList<>();
         try {

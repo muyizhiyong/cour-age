@@ -29,4 +29,9 @@ public class UserResourceImpl implements  UserResource{
     public DTO addUser(UserDTO userDTO) {
         return userService.addUser(userDTO);
     }
+
+    @Override
+    public UserDTO qryByName(String name) {
+        return userService.qryByName(name);
+    }
 }
